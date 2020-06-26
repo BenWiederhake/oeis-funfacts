@@ -6,6 +6,9 @@ cd $(dirname "$0")
 pwd
 
 git pull --ff-only
+pushd gh-pages
+    git pull --ff-only
+popd
 
 wget -nv -O /tmp/stripped.gz 'https://oeis.org/stripped.gz'
 
