@@ -19,13 +19,19 @@ View the up-to-date version at [https://benwiederhake.github.io/oeis-funfacts/](
 
 You only need some Python3 installed somewhere.
 
-## Usage
+You need to make sure the submodule is checked out, too. Ideally, clone using `--recurse-submodules`, like so:
 
-FIXME: Download from OEIS
+```
+$ git clone --recurse-submodules https://github.com/BenWiederhake/oeis-funfacts.git
+```
+
+## Usage
 
 Just use it! No dependencies, and it's short enough.
 
 The result will be written to `index.html`, which you can then publish/view/whatever.
+
+You can also use the shell script to automatically pull the latest `stripped.gz`, build the website, and upload it to github.
 
 ## Background
 
