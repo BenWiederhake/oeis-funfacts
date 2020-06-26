@@ -1,0 +1,4 @@
+@font-face { font-family: 'Astloch'; src: url('Astloch.ttf') format('truetype'); }
+.fancyfont { font-family: 'Astloch', 'Georgia', serif; }
+.hyperlarge { font-size: 1000% }
+.longword { word-wrap: break-word; word-break: break-all; }
