@@ -1,6 +1,6 @@
 # OEIS funfacts
 
-> Some funfacts about OEIS.
+> Some FUN facts about OEIS.
 
 This program/website tells you some fun facts about OEIS.
 View the up-to-date version at [https://benwiederhake.github.io/oeis-funfacts/](https://benwiederhake.github.io/oeis-funfacts/).
