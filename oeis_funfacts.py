@@ -119,6 +119,12 @@ def printablify(results):
     results['most_interesting_n'], results['most_interesting_t'], _ = results['most_interesting']
     results['last_novel_a'], results['last_novel_t'], _ = results['last_novel']
 
+    # JSON cannot store excessively large numbers, so we stringify all potentially-large numbers:
+    results['uninteresting_str'] = [str(e) for e in results['uninteresting']]
+    results['uninteresting_neg_str'] = [str(e) for e in results['uninteresting_neg']]
+    for k in ['largest_t', 'last_novel_t', 'lowest_t', 'most_interesting_n']:
+        results[k + '_str'] = str(results[k])
+
 
 def run(filename):
     locale.setlocale(locale.LC_ALL, 'C')
