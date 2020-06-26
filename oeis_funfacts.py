@@ -109,9 +109,9 @@ def refine(results):
 
 def printablify(results):
     results['uninteresting_1'] = results['uninteresting'][0]
-    results['uninteresting_list'] = ', '.join(str(e) for e in results['uninteresting'][:-1]) + ' and ' + str(results['uninteresting'][-1])
+    results['uninteresting_list'] = ', '.join(str(e) for e in results['uninteresting'][:-1]) + ', and ' + str(results['uninteresting'][-1])
     results['uninteresting_neg_1'] = results['uninteresting_neg'][0]
-    results['uninteresting_neg_list'] = ', '.join(str(e) for e in results['uninteresting_neg'][:-1]) + ' and ' + str(results['uninteresting_neg'][-1])
+    results['uninteresting_neg_list'] = ', '.join(str(e) for e in results['uninteresting_neg'][:-1]) + ', and ' + str(results['uninteresting_neg'][-1])
     results['most_det_n'], results['most_det_a'] = results['most_det']
     results['least_det_n'], results['least_det_a'] = results['least_det']
     results['lowest_t'], results['lowest_a'], _ = results['lowest']
