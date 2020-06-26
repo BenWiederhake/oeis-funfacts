@@ -4,6 +4,7 @@ from collections import defaultdict
 import datetime
 import gzip
 import itertools
+import json
 import locale
 
 
@@ -131,14 +132,16 @@ def run(filename):
                 fp.write('{}\t{}\t{}\n'.format(n, r.occurrence_count, r.first_a_number.strip('A0')))
         results['records'] = '[SNIP, see file results.txt]'  # Too large to display
     else:
-        del results['records']  # Too large to display
+        results['records'] = '[SNIP, too big]'  # Too large to display
     for k, v in results.items():
         print('{}: {}'.format(k, v))
     with open('template.html', 'r') as fp:
         template = fp.read()
     html = template.format(**results)
-    with open('index.html', 'w') as fp:
+    with open('gh-pages/index.html', 'w') as fp:
         fp.write(html)
+    with open('gh-pages/raw.json', 'w') as fp:
+        json.dump(results, fp, indent=1, sort_keys=True)
 
 
 if __name__ == '__main__':
