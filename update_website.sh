@@ -5,6 +5,8 @@ set -ex
 cd $(dirname "$0")
 pwd
 
+git pull --ff-only
+
 wget -nv -O /tmp/stripped.gz 'https://oeis.org/stripped.gz'
 
 ./oeis_funfacts.py
