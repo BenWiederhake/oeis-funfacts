@@ -23,6 +23,8 @@ You need to make sure the submodule is checked out, too. Ideally, clone using `-
 
 ```
 $ git clone --recurse-submodules https://github.com/BenWiederhake/oeis-funfacts.git
+$ cd oeis-funfacts/gh-pages
+$ git checkout gh-pages # git is stupid
 ```
 
 ## Usage
