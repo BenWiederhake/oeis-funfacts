@@ -5,7 +5,7 @@ set -ex
 cd $(dirname "$0")
 pwd
 
-#wget -nv -O /tmp/stripped.gz 'https://oeis.org/stripped.gz'
+wget -nv -O /tmp/stripped.gz 'https://oeis.org/stripped.gz'
 
 ./oeis_funfacts.py
 
