@@ -3,6 +3,7 @@
 from collections import defaultdict
 import datetime
 import gzip
+import heapq
 import itertools
 import json
 import locale
@@ -12,6 +13,8 @@ import locale
 FILENAME = '/tmp/stripped.gz'
 # How many uninteresting number would you like to know?
 MAX_UNINTERESTING = 20
+# How many of most <X> to show
+MOST_COUNT = 5
 # Do you want to graph 'em?
 WRITE_COUNTS = False
 
@@ -49,6 +52,7 @@ def read_from(filename):
             last_modified = line[len(b'# Last Modified: '):].decode().strip()
             continue
         if line.startswith(b'#'):
+            print("Comment: ", line)
             continue
         parts = line.split(b',')
         assert parts[-1] == b'\n', (parts, line, lineno)
@@ -101,29 +105,47 @@ def refine(results):
             # Should never be greater, but whatever.
             break
 
-    results['most_interesting'] = max((r.occurrence_count, n, r.first_a_number) for n, r in records.items())
     results['last_novel'] = max((r.first_a_number, n, r.occurrence_count) for n, r in records.items())
-    results['largest'] = max((n, r.first_a_number, r.occurrence_count) for n, r in records.items())
-    results['lowest'] = min((n, r.first_a_number, r.occurrence_count) for n, r in records.items())
+
+    # Grap the n "most" items from several catagories
+    results['most_interesting'] = heapq.nlargest(MOST_COUNT,
+            ((r.occurrence_count, n, r.first_a_number) for n, r in records.items()))
+    results['largest'] = heapq.nlargest(MOST_COUNT,
+            ((n, r.first_a_number, r.occurrence_count) for n, r in records.items()))
+    results['lowest'] = heapq.nsmallest(MOST_COUNT,
+            ((n, r.first_a_number, r.occurrence_count) for n, r in records.items()))
+
+
+def join_with_and(numbers):
+    if len(numbers) == 1:
+        return str(numbers[0])
+    return ', '.join(map(str, numbers[:-1])) + ', and ' + str(numbers[-1])
 
 
 def printablify(results):
     results['uninteresting_1'] = results['uninteresting'][0]
-    results['uninteresting_list'] = ', '.join(str(e) for e in results['uninteresting'][:-1]) + ', and ' + str(results['uninteresting'][-1])
+    results['uninteresting_list'] = join_with_and(results['uninteresting'])
     results['uninteresting_neg_1'] = results['uninteresting_neg'][0]
-    results['uninteresting_neg_list'] = ', '.join(str(e) for e in results['uninteresting_neg'][:-1]) + ', and ' + str(results['uninteresting_neg'][-1])
+    results['uninteresting_neg_list'] = join_with_and(results['uninteresting_neg'])
     results['most_det_n'], results['most_det_a'] = results['most_det']
     results['least_det_n'], results['least_det_a'] = results['least_det']
-    results['lowest_t'], results['lowest_a'], _ = results['lowest']
-    results['largest_t'], results['largest_a'], _ = results['largest']
-    results['most_interesting_n'], results['most_interesting_t'], _ = results['most_interesting']
+    results['lowest_t'], results['lowest_a'], _ = results['lowest'][0]
+    results['largest_t'], results['largest_a'], _ = results['largest'][0]
+    results['most_interesting_n'], results['most_interesting_t'], _ = results['most_interesting'][0]
     results['last_novel_a'], results['last_novel_t'], _ = results['last_novel']
 
+    # Unnest lists
+    for k, v in list(results.items()):
+        if isinstance(v, list):
+            print("Unnested", k)
+            for i, nth in enumerate(v):
+                results[k + "_" + str(i)] = nth
+
     # JSON cannot store excessively large numbers, so we stringify all potentially-large numbers:
-    results['uninteresting_str'] = [str(e) for e in results['uninteresting']]
-    results['uninteresting_neg_str'] = [str(e) for e in results['uninteresting_neg']]
-    for k in ['largest_t', 'last_novel_t', 'lowest_t', 'most_interesting_n']:
-        results[k + '_str'] = str(results[k])
+    for k, v in list(results.items()):
+        if isinstance(v, int) and abs(v) >= 2 ** 64:
+            print("converted to _str:", k)
+            results[k + '_str'] = str(v)
 
 
 def run(filename):

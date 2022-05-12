@@ -44,7 +44,13 @@ So naturally I wondered what the current lowest uninteresting number is.</p>
 <p class="small text-muted">(According to appearance or lack thereof in the OEIS stripped database.)</p>
 
 <h2>Interesting numbers</h2>
-<p>The most interesting number is {most_interesting_t}, with {most_interesting_n} occurrences.</p>
+<p>
+  The most interesting number is {most_interesting[0][1]}, with {most_interesting[0][0]} occurrences.<br>
+  The 2nd interesting number is {most_interesting[1][1]}, with {most_interesting[1][0]} occurrences.<br>
+  The 3rd interesting number is {most_interesting[2][1]}, with {most_interesting[2][0]} occurrences.<br>
+  The 4th interesting number is {most_interesting[3][1]}, with {most_interesting[3][0]} occurrences.<br>
+  The 5th interesting number is {most_interesting[4][1]}, with {most_interesting[4][0]} occurrences.<br>
+</p>
 <p class="small text-muted">(As counted in the OEIS stripped database.)</p>
 
 <h2>Determinedness</h2>
@@ -52,8 +58,40 @@ So naturally I wondered what the current lowest uninteresting number is.</p>
 <p>The first sequence with a single term is <a href="https://oeis.org/{least_det_a}">{least_det_a}</a>.</p>
 
 <h2>To the Extremes!</h2>
-<p>The smallest (most negative) term is <span class="longword">{lowest_t}</span>, in sequence <a href="https://oeis.org/{lowest_a}">{lowest_a}</a>.</p>
-<p>The largest (most positive) term is <span class="longword">{largest_t}</span>, in sequence <a href="https://oeis.org/{largest_a}">{largest_a}</a>.</p>
+<p>
+  The smallest (most negative) term is <span class="longword">{lowest[0][0]}</span>.
+  <br>
+  Followed by
+  <span class="longword">{lowest[1][0]}</span>,
+  <span class="longword">{lowest[2][0]}</span>,
+  <span class="longword">{lowest[3][0]}</span>, and
+  <span class="longword">{lowest[4][0]}</span>.
+  <br>
+  From respectively
+  <a href="https://oeis.org/{lowest[0][1]}">{lowest[0][1]}</a>,
+  <a href="https://oeis.org/{lowest[1][1]}">{lowest[1][1]}</a>,
+  <a href="https://oeis.org/{lowest[2][1]}">{lowest[2][1]}</a>,
+  <a href="https://oeis.org/{lowest[3][1]}">{lowest[3][1]}</a>, and
+  <a href="https://oeis.org/{lowest[4][1]}">{lowest[4][1]}</a>.
+
+</p>
+
+<p>
+  The largest (most positive) term is <span class="longword">{largest_t}</span>.
+  <br>
+  Followed by
+  <span class="longword">{largest[1][0]}</span>,
+  <span class="longword">{largest[2][0]}</span>,
+  <span class="longword">{largest[3][0]}</span>, and
+  <span class="longword">{largest[4][0]}</span>.
+  <br>
+  From respectively
+  <a href="https://oeis.org/{largest[0][1]}">{largest[0][1]}</a>,
+  <a href="https://oeis.org/{largest[1][1]}">{largest[1][1]}</a>,
+  <a href="https://oeis.org/{largest[2][1]}">{largest[2][1]}</a>,
+  <a href="https://oeis.org/{largest[3][1]}">{largest[3][1]}</a>, and
+  <a href="https://oeis.org/{largest[4][1]}">{largest[4][1]}</a>.
+</p>
 
 <h2>Status</h2>
 <p>All of the interesting tidbits on this page are gathered from <a href="https://oeis.org/stripped.gz">OEIS's <code>stripped.gz</code> file</a>, using their CC-BY-NC 3.0 license. Thank you, <a href="https://oeis.org/">Online Encyclopedia of Integer Sequences</a>!</p>
