@@ -107,7 +107,7 @@ def refine(results):
 
     results['last_novel'] = max((r.first_a_number, n, r.occurrence_count) for n, r in records.items())
 
-    # Grap the n "most" items from several catagories
+    # Grab the n "most" items from several catagories
     results['most_interesting'] = heapq.nlargest(MOST_COUNT,
             ((r.occurrence_count, n, r.first_a_number) for n, r in records.items()))
     results['largest'] = heapq.nlargest(MOST_COUNT,
@@ -143,7 +143,7 @@ def printablify(results):
 
     # JSON cannot store excessively large numbers, so we stringify all potentially-large numbers:
     for k, v in list(results.items()):
-        if isinstance(v, int) and abs(v) >= 2 ** 64:
+        if isinstance(v, int)
             print("converted to _str:", k)
             results[k + '_str'] = str(v)
 
